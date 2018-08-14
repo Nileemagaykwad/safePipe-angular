@@ -6,10 +6,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent {
   constructor(){
-    console.log(window.location.href, "111111appppppp1111111111")
   }
   ngOnInit(){
-    console.log("app created")
   }
 
 }

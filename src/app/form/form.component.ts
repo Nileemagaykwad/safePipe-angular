@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener} from '@angular/core';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-form',
@@ -14,22 +15,21 @@ export class FormComponent implements OnInit {
   Last name:<br>
   <input type="text" name="lastname" value="Mouse">
   <br><br>
-  <!--<a [routerLink]="[/test]" (click)="goHome()">Click me</a>-->
   <a href="javascript:void(0)" onclick="goHome()">Click me</a>
   <script>
   function goHome() {
-    window.history.pushState('page2', 'Title', 'test');
-    console.log("shini pagal")
+    var event = new CustomEvent("CallAngularService");
+    window.dispatchEvent(event);
   }
 </script>
 `;
   @ViewChild('element') public viewElement: ElementRef;
   public element: any;
-  flag = true
+  flag = true;
 
-  constructor(public renderer: Renderer2) {
 
-    console.log(window.location.href, "1111111111111111")
+  constructor(public renderer: Renderer2, private router: Router) {
+
   }
 
   public ngOnInit()
@@ -46,5 +46,8 @@ export class FormComponent implements OnInit {
 
     this.flag = false
   }
-
+@HostListener("window:CallAngularService")
+  public fun(){
+    this.router.navigate(["test"])
+}
 }
