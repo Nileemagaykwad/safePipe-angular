@@ -7,21 +7,30 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
 })
 export class FormComponent implements OnInit {
 
-  htmlSnippet = `<form action="/test">
+  htmlSnippet = `
   First name:<br>
   <input type="text" name="firstname" value="Mickey">
   <br>
   Last name:<br>
   <input type="text" name="lastname" value="Mouse">
   <br><br>
-  <input type="submit" value="Submit">
-</form> 
+  <!--<a [routerLink]="[/test]" (click)="goHome()">Click me</a>-->
+  <a href="javascript:void(0)" onclick="goHome()">Click me</a>
+  <script>
+  function goHome() {
+    window.history.pushState('page2', 'Title', 'test');
+    console.log("shini pagal")
+  }
+</script>
 `;
   @ViewChild('element') public viewElement: ElementRef;
   public element: any;
   flag = true
 
-  constructor(public renderer: Renderer2) {}
+  constructor(public renderer: Renderer2) {
+
+    console.log(window.location.href, "1111111111111111")
+  }
 
   public ngOnInit()
   {
@@ -34,6 +43,7 @@ export class FormComponent implements OnInit {
     this.element.appendChild(fragment);
   }
   goHome() {
+
     this.flag = false
   }
 

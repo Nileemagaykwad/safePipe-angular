@@ -7,7 +7,7 @@ import {FormComponent} from "./form/form.component"
 
 export const routes: Routes = [
   { path: "", component: FormComponent },
-  { path: "test", component: NewComponent }
+  { path: "test", component: NewComponent, data: { preload: true } }
   // { path: "dashboard", component: DashboardComponent }
 ];
 export const appRoutingProviders: any[] = [];
